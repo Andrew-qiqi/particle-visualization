@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D粒子视觉系统 - Particle Visualization System</title>
+  <script type="module" crossorigin src="/assets/index-C88l0ANA.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-5gty-n2G.css">
+</head>
+<body>
+  <!-- 主画布容器 -->
+  <div id="canvas-container"></div>
+  
+  <!-- 背景粒子层 -->
+  <div id="background-particles"></div>
+  
+  <!-- 摄像头窗口 -->
+  <div id="camera-container">
+    <video id="camera-video" playsinline></video>
+    <canvas id="camera-canvas"></canvas>
+    <div id="camera-label">手势控制中</div>
+  </div>
+  
+  <!-- 控制面板 -->
+  <div id="control-panel">
+    <h2>粒子模型</h2>
+    <div class="model-buttons">
+      <button class="model-btn active" data-model="nebula">星云</button>
+      <button class="model-btn" data-model="firework">烟花</button>
+      <button class="model-btn" data-model="saturn">土星</button>
+      <button class="model-btn" data-model="flower">花朵</button>
+      <button class="model-btn" data-model="sphere">球体</button>
+      <button class="model-btn" data-model="spiral">螺旋</button>
+    </div>
+    
+    <h2>基础颜色</h2>
+    <div class="color-picker-wrapper">
+      <input type="color" id="base-color" value="#00ffff">
+      <span id="color-value">#00ffff</span>
+    </div>
+    
+    <h2>粒子密度</h2>
+    <div class="slider-wrapper">
+      <input type="range" id="particle-density" min="1000" max="50000" value="15000" step="1000">
+      <span id="density-value">15000</span>
+    </div>
+    
+    <h2>辉光强度</h2>
+    <div class="slider-wrapper">
+      <input type="range" id="bloom-intensity" min="0" max="3" value="1.5" step="0.1">
+      <span id="bloom-value">1.5</span>
+    </div>
+    
+    <h2>照片导入</h2>
+    <div class="photo-controls">
+      <input type="file" id="photo-input" accept="image/*" hidden>
+      <button id="upload-btn" class="control-btn">上传照片</button>
+      <button id="clear-photo-btn" class="control-btn">清除照片</button>
+    </div>
+    <div id="photo-info">未导入照片</div>
+  </div>
+  
+  <!-- 全屏按钮 -->
+  <button id="fullscreen-btn" title="全屏">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+    </svg>
+  </button>
+  
+  <!-- 手势提示 -->
+  <div id="gesture-hint">
+    <div class="hint-item">
+      <span class="hint-icon">✋</span>
+      <span>开合手掌：控制粒子扩散/收缩</span>
+    </div>
+    <div class="hint-item">
+      <span class="hint-icon">👆</span>
+      <span>移动手部：控制旋转</span>
+    </div>
+    <div class="hint-item" id="photo-hint" style="display: none;">
+      <span class="hint-icon">🖼️</span>
+      <span>双手距离：缩放照片</span>
+    </div>
+  </div>
+  
+  <!-- 加载画面 -->
+  <div id="loading">
+    <div class="loading-spinner"></div>
+    <p>正在初始化视觉系统...</p>
+    <p class="loading-sub">请允许摄像头权限以启用手势控制</p>
+  </div>
+
+</body>
+</html>
